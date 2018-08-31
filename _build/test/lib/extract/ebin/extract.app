@@ -1,0 +1,9 @@
+{application,extract,
+             [{applications,[kernel,stdlib,elixir,logger]},
+              {description,"extract"},
+              {modules,['Elixir.Extract','Elixir.Parsers.DateParser',
+                        'Elixir.Parsers.FloatParser',
+                        'Elixir.Parsers.IntParser',
+                        'Elixir.Parsers.ValidationError']},
+              {registered,[]},
+              {vsn,"0.1.0"}]}.
