@@ -36,8 +36,10 @@ defmodule Parsers.DateParser do
   {:error, ["date_not_provided"], %{other: 123}}
   ```
   """
-  @spec parse(Map or Tuple, String or Atom, Map, Keywords or nil) ::
-    {:ok, [], struct} | {:error, ["invalid_#{param_name}"], struct} | {:error, ["#{param_name}_not_provided"], struct}
+  @doc since: "0.1.0"
+  @spec parse(Map | Tuple, String | Atom, Map, Keywords | nil) ::
+    {:ok, [], struct} | {:error, [String], struct}
+
   def parse(struct, param_name, params, restrictions \\ [])
   def parse(struct, param_name, params, restrictions) when is_map(struct),
       do: parse({:ok, [], struct}, param_name, params, restrictions)
