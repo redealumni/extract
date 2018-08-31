@@ -3,6 +3,37 @@ defmodule Parsers.IntParser do
 
   alias Parsers.ValidationError
 
+  @doc """
+  Parse input data for integer.
+
+  `struct` is previous struct. Can be map or tuple, anything else do nothing.
+  `param_name` is key name. Can be atom or string.
+  `params` is map with input data. Need to be a map.
+  `restrictions` is keywords with restrictions of input. Can contains:
+    * `:default` - will put input data with this value if input data is nil or empty string.
+    * `:max` - the max integer. Input data need to be equals or upper of this value.
+    * `:min` - the min integer. Input data need to be equals or lower of this value.
+    * `:required` - if `params` map needs to have input value with valid integer.
+
+  ### Examples
+  Just call:
+  ```
+  iex> Parsers.IntParser.parse(%{}, :integer, %{integer: "1"})
+  {:ok, [], %{integer: 1}}
+
+  # With default value
+  iex> Parsers.IntParser.parse(%{other: 123}, :integer, %{integer: ""}, default: "1.0")
+  {:ok, [], %{integer: 1.0, other: 123}}
+
+  # If input data is invalid
+  iex> Parsers.IntParser.parse(%{other: 123}, :integer, %{integer: "asdsa"})
+  {:error, ["invalid_integer"], %{other: 123}}
+
+  # If input data is required and not provider
+  iex> Parsers.IntParser.parse(%{other: 123}, :integer, %{}, required: true)
+  {:error, ["integer_not_provided"], %{other: 123}}
+  ```
+  """
   def parse(struct, param_name, params, restrictions \\ [])
   def parse(struct, param_name, params, restrictions) when is_map(struct),
       do: parse({:ok, [], struct}, param_name, params, restrictions)

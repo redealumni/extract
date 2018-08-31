@@ -8,28 +8,28 @@ defmodule Parsers.DateParser do
 
   `struct` is previous struct. Can be map or tuple, anything else do nothing.
   `param_name` is key name. Can be atom or string.
-  `params` is map with input date. Need to be a map.
+  `params` is map with input data. Need to be a map.
   `restrictions` is keywords with restrictions of date. Can contains:
-    * `:default` - will put input date with this value if input date is nil or empty string.
-    * `:max` - the max date. Input date need to be equals or upper of this value.
-    * `:min` - the min date. Input date need to be equals or lower of this value.
+    * `:default` - will put input data with this value if input data is nil or empty string.
+    * `:max` - the max date. Input data need to be equals or upper of this value.
+    * `:min` - the min date. Input data need to be equals or lower of this value.
     * `:required` - if `params` map needs to have date value with valid date.
 
   ### Examples
   Just call:
   ```
   iex> Parsers.DateParser.parse(%{}, :date, %{date: "2018-08-31"})
-  {:ok, [], %{test: ~D[2018-08-31]}}
+  {:ok, [], %{date: ~D[2018-08-31]}}
 
   # With default value
   iex> Parsers.DateParser.parse(%{other: 123}, :date, %{date: ""}, default: "2018-08-31")
-  {:ok, [], %{test: ~D[2018-08-31], other: 123}}
+  {:ok, [], %{date: ~D[2018-08-31], other: 123}}
 
-  # If input date is invalid
+  # If input data is invalid
   iex> Parsers.DateParser.parse(%{other: 123}, :date, %{date: "asdsa"})
   {:error, ["invalid_date"], %{other: 123}}
 
-  # If input date is required and not provider
+  # If input data is required and not provider
   iex> Parsers.DateParser.parse(%{other: 123}, :date, %{}, required: true)
   {:error, ["date_not_provided"], %{other: 123}}
   ```
