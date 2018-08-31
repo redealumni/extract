@@ -17,20 +17,22 @@ defmodule Parsers.DateParser do
 
   ### Examples
   Just call:
-      iex> Parsers.DateParser.parse(%{}, :date, %{date: "2018-08-31"})
-      {:ok, [], %{test: ~D[2018-08-31]}}
+  ```
+  iex> Parsers.DateParser.parse(%{}, :date, %{date: "2018-08-31"})
+  {:ok, [], %{test: ~D[2018-08-31]}}
 
-      # With default value
-      iex> Parsers.DateParser.parse(%{other: 123}, :date, %{date: ""}, default: "2018-08-31")
-      {:ok, [], %{test: ~D[2018-08-31], other: 123}}
+  # With default value
+  iex> Parsers.DateParser.parse(%{other: 123}, :date, %{date: ""}, default: "2018-08-31")
+  {:ok, [], %{test: ~D[2018-08-31], other: 123}}
 
-      # If input date is invalid
-      iex> Parsers.DateParser.parse(%{other: 123}, :date, %{date: "asdsa"})
-      {:error, ["invalid_date"], %{other: 123}}
+  # If input date is invalid
+  iex> Parsers.DateParser.parse(%{other: 123}, :date, %{date: "asdsa"})
+  {:error, ["invalid_date"], %{other: 123}}
 
-      # If input date is required and not provider
-      iex> Parsers.DateParser.parse(%{other: 123}, :date, %{}, required: true)
-      {:error, ["date_not_provided"], %{other: 123}}
+  # If input date is required and not provider
+  iex> Parsers.DateParser.parse(%{other: 123}, :date, %{}, required: true)
+  {:error, ["date_not_provided"], %{other: 123}}
+  ```
   """
   def parse(struct, param_name, params, restrictions \\ [])
   def parse(struct, param_name, params, restrictions) when is_map(struct),
