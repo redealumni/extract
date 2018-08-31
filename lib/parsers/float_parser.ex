@@ -6,6 +6,8 @@ defmodule Parsers.FloatParser do
   @doc """
   Parse input data for float.
 
+  Returns a tuple with `:ok` or `:error`, a list of messages (used only if returns `:error`) and `struct`.
+
   `struct` is previous struct. Can be map or tuple, anything else do nothing.
   `param_name` is key name. Can be atom or string.
   `params` is map with input data. Need to be a map.
@@ -38,6 +40,8 @@ defmodule Parsers.FloatParser do
   {:error, ["float_not_provided"], %{other: 123}}
   ```
   """
+  @spec parse(Map or Tuple, String or Atom, Map, Keywords or nil) ::
+    {:ok, [], struct} | {:error, ["invalid_#{param_name}"], struct} | {:error, ["#{param_name}_not_provided"], struct}
   def parse(struct, param_name, params, restrictions \\ [])
   def parse(struct, param_name, params, restrictions) when is_map(struct),
       do: parse({:ok, [], struct}, param_name, params, restrictions)
