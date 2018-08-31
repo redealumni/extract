@@ -1,6 +1,6 @@
 # Extract
 
-**TODO: Add description**
+This is a small library containing utility modules for Phoenix/Elixir application, such as sending JSON responses, parsing, validating input data and communicating through HTTP. 
 
 ## Installation
 
