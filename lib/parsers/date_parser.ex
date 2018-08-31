@@ -3,6 +3,17 @@ defmodule Parsers.DateParser do
 
   alias Parsers.ValidationError
 
+  @doc """
+  Parse input data for date.
+
+  `struct` is previous struct. Can be map or tuple, anything else do nothing.
+  `param_name` is key name.
+  `params` is map with input date. Need to be a map.
+  `restrictions` is keywords with restrictions of date. Can contains:
+    * `:default` - will put input date with this value if input date is nil or empty string.
+    * `:max` - the max date. Input date need to be equals or upper of this value.
+    * `:min` - the min date. Input date need to be equals or lower of this value.
+  """
   def parse(struct, param_name, params, restrictions \\ [])
   def parse(struct, param_name, params, restrictions) when is_map(struct),
       do: parse({:ok, [], struct}, param_name, params, restrictions)
