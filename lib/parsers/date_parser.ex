@@ -4,7 +4,7 @@ defmodule Parsers.DateParser do
   alias Parsers.ValidationError
 
   @doc """
-  Parse input data for date.
+  Parse input data for date. The input date needs to be in format YYYY-MM-DD.
 
   Returns a tuple with `:ok` or `:error`, a list of messages (used only if returns `:error`) and `struct`.
 
