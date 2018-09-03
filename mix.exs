@@ -4,7 +4,7 @@ defmodule Extract.MixProject do
   def project do
     [
       app: :extract,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: ">= 1.4.0",
       elixirc_options: [warnings_as_errors: true],
       start_permanent: Mix.env() == :prod,
